@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView BodyStatusTextView;
     TextView IdealWeightTextViewOutput;
     TextView ActualWeightTextViewOutput;
+    double bodyFrameSlimness=0;
+    double heightInCm;
+    double idealWeight;
+    double bmi;
 
 
 
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.SubmitButton:
             {
+                submit(v);
                 break;
             }
             case R.id.ClearButton: {
@@ -107,5 +112,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void submit(View v)
+    {
+        if (bodyFrameButton.getCheckedRadioButtonId()==R.id.LargeRadioButton)
+        {
+            bodyFrameSlimness=1.1;
+        }
+        if (bodyFrameButton.getCheckedRadioButtonId()==R.id.MediumRadioButton)
+        {
+            bodyFrameSlimness=1;
+        }
+        if (bodyFrameButton.getCheckedRadioButtonId()==R.id.SmallRadioButton)
+        {
+            bodyFrameSlimness=0.9;
+        }
+
+         heightInCm=heightSeekBar.getProgress()*0.01;
+         bmi=Integer.parseInt(actualWeightEditText.getText().toString())/(Math.pow(heightInCm,2));
+         idealWeight= (heightSeekBar.getProgress()-100+(Integer.parseInt(ageEditText.getText().toString())/10))*0.9*bodyFrameSlimness;
+
+         BMITextView.setText(String.valueOf(bmi));
+        BodyStatusTextView.setText(weightStatus(bmi));
+         IdealWeightTextViewOutput.setText(String.valueOf(idealWeight));
+         ActualWeightTextViewOutput.setText(actualWeightEditText.getText().toString());
+    }
+
+    public String weightStatus(double bmi)
+    {
+        if (bmi<15)
+        {
+            return "Anorexic ";
+        }
+        if (bmi>=15 && bmi<=18.5)
+        {
+            return "Underweight ";
+        }
+        if (bmi>=18.5 && bmi<=24.9)
+        {
+            return "Normal ";
+        }
+        if (bmi>=25 && bmi<=29.9)
+        {
+            return "Overweight  ";
+        }
+        if (bmi>=30 && bmi<=35)
+        {
+            return "Obese  ";
+        }
+        if (bmi>=35)
+        {
+            return "Extreme Obese  ";
+        }
+        return "";
+    }
 
 }

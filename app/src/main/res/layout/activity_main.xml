@@ -327,7 +327,7 @@
         app:layout_constraintVertical_bias="0.766" />
 
     <TextView
-        android:id="@+id/BodtStatusTextView"
+        android:id="@+id/BodyStatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="---"
@@ -351,7 +351,7 @@
         app:layout_constraintVertical_bias="0.808" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/IdialWeightTextViewOutput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="---"
